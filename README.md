@@ -40,9 +40,16 @@ ai-daily-report/
 ├── README.md                       ← 이 파일 (GitHub 소개 · 실행법)
 ├── CLAUDE.md                       ← 에이전트 진입점 (환경 · 규칙 · 스킬)
 ├── SOUL.md                         ← 사명 · 판단 원칙 (CLAUDE.md에서 참조)
-├── AI_Report_2026-06-11.html       ← 날짜별 리포트 (자동 생성)
-└── .claude/skills/audit-and-issue/ ← 레포 감사 스킬
+├── prompts/
+│   └── daily-report-prompt.md      ← 리포트 생성 프롬프트 (파이프라인 소스)
+├── reports/
+│   └── AI_Report_YYYY-MM-DD.html   ← 날짜별 산출물 (자동 생성, 누적)
+└── .claude/skills/audit-and-issue/ ← 레포 감사 · 이슈 · 문서최적화 스킬
 ```
+
+> **코드가 없는 이유**: 이 레포는 Python/JS 크롤러 대신 **Claude Code가 직접
+> 수집·작성하는 AI-네이티브 파이프라인**입니다. 전통적 코드의 역할은
+> [prompts/daily-report-prompt.md](prompts/daily-report-prompt.md)가 대신합니다.
 
 ---
 
@@ -62,17 +69,32 @@ ai-daily-report/
 
 ```
 Claude Code 스케줄러
-    └─ 매일 08:00
+    └─ 매일 08:00 → prompts/daily-report-prompt.md 실행
          ├─ WebSearch × 5 (모델 / 기업 / 규제 / 도입 / 투자)
-         ├─ 핵심 사실 추출 및 한국어 정리
-         └─ AI_Report_YYYY-MM-DD.html 생성 → 저장
+         ├─ 원출처 검증 (SOUL.md 판단 원칙)
+         ├─ reports/AI_Report_YYYY-MM-DD.html 생성
+         └─ git commit & push
 ```
 
 ---
 
-## 🚀 수동 실행
+## 🚀 실행 방법
 
-Claude Code 사이드바 → **Scheduled** 탭 → `daily-ai-news-report` → **Run now**
+**전제 조건**: [Claude Code](https://claude.ai/code) 설치 + `gh auth login` 완료 (Python/Node 불필요)
+
+```bash
+# 1. 클론
+git clone https://github.com/a01092317232-lang/ai-daily-report.git
+cd ai-daily-report
+
+# 2. Claude Code 실행 후 프롬프트 입력
+claude
+> prompts/daily-report-prompt.md 를 읽고 오늘 날짜 리포트를 생성해줘
+```
+
+**스케줄 실행**: Claude Code 사이드바 → **Scheduled** 탭 → `daily-ai-news-report` → **Run now**
+
+**품질 점검**: `/audit-and-issue` 또는 "레포 점검해줘" — 링크·출처 감사부터 이슈 등록·수정·문서 최적화까지 자동 수행
 
 ---
 
