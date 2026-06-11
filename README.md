@@ -36,11 +36,12 @@ Claude AI가 글로벌 소스 15개 이상을 분석해 4개 섹션으로 정리
 ## 📁 파일 구조
 
 ```
-AI_Daily_Report/
-├── README.md
-├── AI_Report_2026-06-11.html   ← 오늘 리포트
-├── AI_Report_2026-06-12.html   ← 내일 자동 생성
-└── ...
+ai-daily-report/
+├── README.md                       ← 이 파일 (GitHub 소개 · 실행법)
+├── CLAUDE.md                       ← 에이전트 진입점 (환경 · 규칙 · 스킬)
+├── SOUL.md                         ← 사명 · 판단 원칙 (CLAUDE.md에서 참조)
+├── AI_Report_2026-06-11.html       ← 날짜별 리포트 (자동 생성)
+└── .claude/skills/audit-and-issue/ ← 레포 감사 스킬
 ```
 
 ---
