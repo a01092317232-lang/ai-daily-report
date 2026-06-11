@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -Command \"if ($env:CLAUDE_FILE_PATHS -match 'reports\\\\.*\\.html') { Write-Output '[hook] 리포트 변경 감지 — evaluate-report 스킬로 품질 검증이 필요합니다 (rubric.md 기준)' }\""
+          }
+        ]
+      }
+    ]
+  }
+}

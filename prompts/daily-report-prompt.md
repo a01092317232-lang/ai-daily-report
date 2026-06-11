@@ -28,10 +28,24 @@
    - 라이트 테마(#f0f2f8), 카드 클릭 시 원문 이동, 당일 뉴스에 NEW 배지
    - 푸터에 자동 생성 명시
 
-4. 생성 후: git add → commit → push
+4. 품질 검증 루프 (v4):
+   - quality-reviewer 에이전트가 rubric.md 5항목 채점
+   - 전 항목 4점 이상 → 통과
+   - 미달 → 감점 사유 수정 후 재채점 (최대 3라운드, 실패 시 사람에게 보고)
+
+5. 통과 후: git add → commit → push
 ```
 
 ## 산출물 규칙
 
 - 산출물은 `reports/` 폴더에만 누적한다 (루트 커밋 금지)
-- 품질 점검은 `audit-and-issue` 스킬로 수행한다
+- 품질 점검은 `audit-and-issue`(수시 감사) / `evaluate-report`(루브릭 채점) 스킬로 수행한다
+
+## 역할 분담 (v3 아키텍처)
+
+| 구성요소 | 역할 |
+|---------|------|
+| 메인 Claude | 코디네이터 — 아래 둘에게 일을 나눠줌 |
+| `.claude/agents/report-writer.md` | 수집·작성 전담 |
+| `.claude/agents/quality-reviewer.md` | rubric.md 채점 전담 (작성자와 분리) |
+| `.claude/settings.json` 훅 | 리포트 저장 시 "검증 필요" 자동 알림 |
