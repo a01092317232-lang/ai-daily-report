@@ -28,5 +28,5 @@ ai-daily-report/
 
 ## 커스텀 스킬
 
-`audit-and-issue` — 파일 감사 → WebSearch 검증 → GitHub 이슈 자동 등록  
-트리거: "레포 점검해줘" / "버그 검증해줘" / "이슈 등록해줘"
+`audit-and-issue` — 풀 파이프라인: 감사 → 이슈 등록 → 수정 → 푸시 → close + 문서 최적화(doc-optimizer)  
+트리거: "레포 점검해줘" / "버그 검증해줘" / "문서 점검해줘"
