@@ -6,17 +6,19 @@
 <title>AI 동향 리포트 — 2026년 6월 11일</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #222535;
-    --border: #2e3248;
-    --accent: #6c63ff;
-    --accent2: #00d4aa;
-    --accent3: #ff6b6b;
-    --accent4: #ffa500;
-    --text: #e8eaf0;
-    --text-muted: #8b90a8;
-    --tag-bg: #2a2d45;
+    --bg: #f0f2f8;
+    --surface: #ffffff;
+    --surface2: #f7f8fc;
+    --border: #e2e6f0;
+    --accent: #5b52e8;
+    --accent2: #00b894;
+    --accent3: #e84545;
+    --accent4: #f39c12;
+    --text: #1a1d2e;
+    --text-muted: #6b7280;
+    --tag-bg: #eef0f8;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-hover: 0 8px 28px rgba(91,82,232,0.15);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -29,63 +31,101 @@
 
   /* ── Header ── */
   header {
-    background: linear-gradient(135deg, #1a1d27 0%, #12142a 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f4f6ff 100%);
     border-bottom: 1px solid var(--border);
-    padding: 28px 48px;
+    padding: 24px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
   }
   .logo { display: flex; align-items: center; gap: 12px; }
   .logo-icon {
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(91,82,232,0.3);
   }
-  .logo-text h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-text h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); }
   .logo-text p { font-size: 12px; color: var(--text-muted); }
   .header-meta { text-align: right; }
-  .header-meta .date { font-size: 22px; font-weight: 700; color: var(--accent2); }
+  .header-meta .date { font-size: 22px; font-weight: 800; color: var(--accent); }
   .header-meta .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .new-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white; font-size: 10px; font-weight: 800;
+    padding: 3px 8px; border-radius: 20px;
+    letter-spacing: 1px; text-transform: uppercase;
+    animation: pulse 2s infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
 
   /* ── Layout ── */
-  .container { max-width: 1200px; margin: 0 auto; padding: 40px 48px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 36px 48px; }
 
   /* ── Summary Bar ── */
   .summary-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
   .stat-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 16px;
+    padding: 22px 20px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: transparent;
   }
   .stat-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
+    height: 4px;
+    border-radius: 16px 16px 0 0;
   }
-  .stat-card.models::before { background: var(--accent); }
-  .stat-card.biz::before { background: var(--accent2); }
-  .stat-card.reg::before { background: var(--accent4); }
-  .stat-card.invest::before { background: var(--accent3); }
-  .stat-num { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+  .stat-card::after {
+    content: '↗';
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: var(--text-muted);
+  }
+  .stat-card:hover::after { opacity: 1; }
+  .stat-card.models::before { background: linear-gradient(90deg, var(--accent), #8b82ff); }
+  .stat-card.biz::before { background: linear-gradient(90deg, var(--accent2), #00d4aa); }
+  .stat-card.reg::before { background: linear-gradient(90deg, var(--accent4), #ffcc00); }
+  .stat-card.invest::before { background: linear-gradient(90deg, var(--accent3), #ff8a80); }
+  .stat-num { font-size: 34px; font-weight: 900; margin-bottom: 4px; line-height: 1; }
   .stat-card.models .stat-num { color: var(--accent); }
   .stat-card.biz .stat-num { color: var(--accent2); }
   .stat-card.reg .stat-num { color: var(--accent4); }
   .stat-card.invest .stat-num { color: var(--accent3); }
-  .stat-label { font-size: 13px; color: var(--text-muted); }
+  .stat-label { font-size: 13px; color: var(--text-muted); line-height: 1.4; margin-top: 6px; }
 
-  /* ── Quick Digest ── */
+  /* ── Section Title ── */
   .section-title {
     font-size: 11px;
     font-weight: 700;
@@ -104,80 +144,104 @@
     background: var(--border);
   }
 
+  /* ── Quick Digest ── */
   .digest-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 40px;
+    gap: 12px;
+    margin-bottom: 36px;
   }
   .digest-item {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 16px 18px;
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    transition: border-color 0.2s;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
-  .digest-item:hover { border-color: var(--accent); }
+  .digest-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
   .digest-num {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     color: var(--border);
     line-height: 1;
     min-width: 28px;
   }
-  .digest-content h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .digest-content h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
   .digest-content p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .is-new { color: #ff416c; font-weight: 800; font-size: 10px; letter-spacing: 0.5px; margin-left: 6px; }
 
   /* ── News Cards ── */
-  .news-section { margin-bottom: 36px; }
+  .news-section { margin-bottom: 32px; }
   .section-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .section-badge {
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.5px;
   }
-  .badge-model { background: rgba(108,99,255,0.15); color: var(--accent); border: 1px solid rgba(108,99,255,0.3); }
-  .badge-biz { background: rgba(0,212,170,0.15); color: var(--accent2); border: 1px solid rgba(0,212,170,0.3); }
-  .badge-reg { background: rgba(255,165,0,0.15); color: var(--accent4); border: 1px solid rgba(255,165,0,0.3); }
-  .badge-invest { background: rgba(255,107,107,0.15); color: var(--accent3); border: 1px solid rgba(255,107,107,0.3); }
-  .badge-enterprise { background: rgba(100,200,255,0.15); color: #64c8ff; border: 1px solid rgba(100,200,255,0.3); }
+  .badge-model { background: #ede9ff; color: var(--accent); }
+  .badge-biz { background: #d6f5ef; color: #00956a; }
+  .badge-reg { background: #fff3dc; color: #c77d00; }
+  .badge-invest { background: #ffe5e5; color: #c43030; }
+  .badge-enterprise { background: #e0f4ff; color: #0077b6; }
 
   .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .news-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 22px 24px;
-    transition: all 0.2s;
+    box-shadow: var(--shadow);
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
   .news-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(108,99,255,0.1);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+  .news-card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
+  .card-arrow {
+    position: absolute;
+    top: 18px; right: 18px;
+    font-size: 16px;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.2s;
+    color: var(--accent);
   }
   .news-card.featured {
     grid-column: span 2;
-    background: linear-gradient(135deg, #1e2035, #1a1d27);
+    background: linear-gradient(135deg, #fafbff, #f4f6ff);
+    border-color: rgba(91,82,232,0.2);
   }
   .card-tag {
     display: inline-block;
-    padding: 3px 8px;
+    padding: 3px 9px;
     background: var(--tag-bg);
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-muted);
     margin-bottom: 10px;
     letter-spacing: 0.5px;
@@ -195,11 +259,7 @@
     color: var(--text-muted);
     line-height: 1.65;
   }
-  .news-card .highlight {
-    display: inline;
-    color: var(--text);
-    font-weight: 600;
-  }
+  .highlight { color: var(--accent); font-weight: 700; }
   .impact-bar {
     display: flex;
     align-items: center;
@@ -210,59 +270,40 @@
   }
   .impact-label { font-size: 11px; color: var(--text-muted); }
   .impact-dots { display: flex; gap: 4px; }
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--border);
-  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
   .dot.filled { background: var(--accent2); }
   .dot.filled.high { background: var(--accent3); }
 
   /* ── Insight Box ── */
   .insight-box {
-    background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(0,212,170,0.05));
-    border: 1px solid rgba(108,99,255,0.25);
-    border-radius: 14px;
+    background: linear-gradient(135deg, #f0eeff, #edfaf5);
+    border: 1px solid rgba(91,82,232,0.2);
+    border-radius: 16px;
     padding: 28px 32px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow);
   }
-  .insight-box::before {
-    content: '💡';
-    position: absolute;
-    top: -10px; right: 20px;
-    font-size: 60px;
-    opacity: 0.06;
-  }
-  .insight-box h3 { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
-  .insight-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .insight-box h3 { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 14px; }
+  .insight-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .insight-list li {
     font-size: 13px;
     color: var(--text);
-    padding-left: 16px;
+    padding-left: 18px;
     position: relative;
+    line-height: 1.6;
   }
   .insight-list li::before {
     content: '→';
-    position: absolute;
-    left: 0;
+    position: absolute; left: 0;
     color: var(--accent2);
     font-weight: 700;
   }
 
   /* ── Sources ── */
-  .sources-section {
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    margin-top: 20px;
-  }
-  .sources-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  }
+  .sources-section { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 20px; }
+  .sources-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .source-link {
     padding: 5px 12px;
     background: var(--surface);
@@ -272,8 +313,9 @@
     color: var(--text-muted);
     text-decoration: none;
     transition: all 0.2s;
+    box-shadow: var(--shadow);
   }
-  .source-link:hover { border-color: var(--accent); color: var(--accent); }
+  .source-link:hover { border-color: var(--accent); color: var(--accent); background: #f0eeff; }
 
   /* ── Footer ── */
   footer {
@@ -286,7 +328,6 @@
     font-size: 12px;
     color: var(--text-muted);
   }
-  footer a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 900px) {
     .summary-bar { grid-template-columns: repeat(2, 1fr); }
@@ -304,83 +345,83 @@
   <div class="logo">
     <div class="logo-icon">🤖</div>
     <div class="logo-text">
-      <h1>AI Daily Intelligence</h1>
-      <p>글로벌 AI 동향 · 전략 담당자용 브리핑</p>
+      <h1>AI Daily Intelligence <span class="new-badge">● LIVE</span></h1>
+      <p>글로벌 AI 동향 · 전략 담당자용 브리핑 · 매일 오전 8시 자동 업데이트</p>
     </div>
   </div>
   <div class="header-meta">
     <div class="date">2026년 6월 11일 (수)</div>
-    <div class="subtitle">수집 시각 08:00 · 글로벌 주요 소스 15+ 분석</div>
+    <div class="subtitle">오늘 새로 업데이트된 뉴스만 선별 · 소스 15개+ 분석</div>
   </div>
 </header>
 
 <div class="container">
 
-  <!-- ── STAT CARDS ── -->
+  <!-- ── STAT CARDS (클릭 가능) ── -->
   <div class="summary-bar">
-    <div class="stat-card models">
+    <a class="stat-card models" href="https://llm-stats.com/ai-news" target="_blank">
       <div class="stat-num">4+</div>
       <div class="stat-label">이번 주 신규 AI 모델 출시</div>
-    </div>
-    <div class="stat-card biz">
+    </a>
+    <a class="stat-card biz" href="https://writer.com/blog/enterprise-ai-adoption-2026/" target="_blank">
       <div class="stat-num">78%</div>
       <div class="stat-label">기업 AI 도입률 (전년 55%)</div>
-    </div>
-    <div class="stat-card reg">
+    </a>
+    <a class="stat-card reg" href="https://cannews.net/eu-us-and-china-enter-2026-with-stricter-ai-rules/" target="_blank">
       <div class="stat-num">3大</div>
       <div class="stat-label">규제 체계 동시 강화 (EU·미·중)</div>
-    </div>
-    <div class="stat-card invest">
+    </a>
+    <a class="stat-card invest" href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">
       <div class="stat-num">$300B</div>
       <div class="stat-label">Q1 2026 VC 투자 사상 최고</div>
-    </div>
+    </a>
   </div>
 
   <!-- ── QUICK DIGEST ── -->
-  <div class="section-title">오늘의 핵심 요약</div>
+  <div class="section-title">오늘의 핵심 요약 <span style="font-size:10px;background:#ff416c;color:white;padding:2px 7px;border-radius:10px;letter-spacing:1px;">TODAY</span></div>
   <div class="digest-grid">
-    <div class="digest-item">
+    <a class="digest-item" href="https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/" target="_blank">
       <div class="digest-num">01</div>
       <div class="digest-content">
-        <h4>Microsoft, 자체 AI 모델 7종 공개</h4>
+        <h4>Microsoft, 자체 AI 모델 7종 공개 <span class="is-new">NEW</span></h4>
         <p>OpenAI 의존도 줄이고 비용 절감 목적. 개발자 대상 즉시 제공 시작.</p>
       </div>
-    </div>
-    <div class="digest-item">
+    </a>
+    <a class="digest-item" href="https://aifundingtracker.com/top-50-ai-startups/" target="_blank">
       <div class="digest-num">02</div>
       <div class="digest-content">
-        <h4>Anthropic IPO 초안 SEC 제출</h4>
+        <h4>Anthropic IPO 초안 SEC 제출 <span class="is-new">NEW</span></h4>
         <p>Series H $65B 마감 후 공모 준비 돌입. AI 기업 최초 대형 상장 관문.</p>
       </div>
-    </div>
-    <div class="digest-item">
+    </a>
+    <a class="digest-item" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">
       <div class="digest-num">03</div>
       <div class="digest-content">
         <h4>EU AI Act 2026년 8월 전면 발효</h4>
         <p>고위험 AI 시스템 의무화 규정 적용. 국내 기업 수출 전략 재검토 필요.</p>
       </div>
-    </div>
-    <div class="digest-item">
+    </a>
+    <a class="digest-item" href="https://www.techrepublic.com/article/ai-adoption-trends-enterprise/" target="_blank">
       <div class="digest-num">04</div>
       <div class="digest-content">
-        <h4>에이전틱 AI 기업 도입 97% 달성</h4>
+        <h4>에이전틱 AI 기업 도입 97% 달성 <span class="is-new">NEW</span></h4>
         <p>자율 실행 AI 에이전트가 기업 표준으로 자리잡는 속도 예상 초과.</p>
       </div>
-    </div>
-    <div class="digest-item">
+    </a>
+    <a class="digest-item" href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">
       <div class="digest-num">05</div>
       <div class="digest-content">
         <h4>Q1 VC $242B 중 80%가 AI 집중</h4>
         <p>OpenAI $122B, Anthropic $30B, xAI $20B. 빅4가 전체의 65% 흡수.</p>
       </div>
-    </div>
-    <div class="digest-item">
+    </a>
+    <a class="digest-item" href="https://llm-stats.com/ai-news" target="_blank">
       <div class="digest-num">06</div>
       <div class="digest-content">
-        <h4>Apple, Gemini 기반 Siri + Claude 옵션</h4>
+        <h4>Apple, Gemini 기반 Siri + Claude 옵션 <span class="is-new">NEW</span></h4>
         <p>Tim Cook 발표. iPhone 내 Claude 선택 가능 — AI 플랫폼 전쟁 새 국면.</p>
       </div>
-    </div>
+    </a>
   </div>
 
   <!-- ── SECTION 1: MODELS ── -->
@@ -389,7 +430,8 @@
       <span class="section-badge badge-model">📐 모델 & 기술</span>
     </div>
     <div class="news-grid">
-      <div class="news-card featured">
+      <a class="news-card featured" href="https://llm-stats.com/ai-news" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">⭐ 주요 동향</div>
         <h3>6월, 사상 최대 모델 출시 경쟁 — GPT-5.5 · Claude Opus 4.8 · Gemini 3.5 동시대 격돌</h3>
         <p>
@@ -397,7 +439,6 @@
           Instant/Thinking/Pro 세 가지 모드를 제공하며 에이전틱 작업 최강자로 평가받는다.
           <span class="highlight">Claude Opus 4.8</span>(5월 28일)은 기본 컨텍스트 100만 토큰, Fast Mode 비용 3배 절감, 코딩 벤치마크 1위를 재탈환했다.
           <span class="highlight">Gemini 3.5 Flash</span>는 284 토큰/초의 속도로 가성비 포지션을 차지하며 Google I/O에서 공개됐다.
-          Gemini 3.5 Pro는 6월 중 출시가 확정된 상태다.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -407,16 +448,16 @@
           </div>
           <span class="impact-label" style="margin-left:4px">최고</span>
         </div>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">Microsoft</div>
         <h3>Microsoft, 자체 MAI 모델 7종 동시 공개 — OpenAI 의존 탈피 선언</h3>
         <p>
           'Hill-climbing machine' 전략 하에 개발된 7개의 MAI 모델을 공개했다.
           <span class="highlight">비용 절감과 공급망 리스크 분산</span>이 핵심 목적이며,
           Azure 고객은 OpenAI 대비 저렴한 단가로 즉시 이용 가능하다.
-          동시에 OpenAI의 GPT-5.5는 Microsoft Foundry를 통해 GA 전환됐다 — 파트너이자 경쟁자 관계 심화.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -426,16 +467,16 @@
           </div>
           <span class="impact-label" style="margin-left:4px">높음</span>
         </div>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://llm-stats.com/ai-news" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">Anthropic · Apple</div>
         <h3>Claude Fable 5 출시 + iPhone 내 Claude 선택 가능 — AI 플랫폼 전쟁 새 국면</h3>
         <p>
-          Anthropic의 창작 특화 모델 <span class="highlight">Claude Fable 5</span>가 출시됐다.
-          긴 형식 소설·대본·캐릭터 보이스에 특화, Opus/Sonnet 대비 낮은 비용.
-          더 큰 뉴스는 Tim Cook의 발표: Gemini 기반 Siri 출시와 동시에
-          사용자가 iPhone에서 <span class="highlight">Claude를 기본 AI로 선택</span>할 수 있는 옵션을 공개.
+          창작 특화 모델 <span class="highlight">Claude Fable 5</span> 출시.
+          Tim Cook 발표: Gemini 기반 Siri와 동시에
+          사용자가 iPhone에서 <span class="highlight">Claude를 기본 AI로 선택</span>할 수 있는 옵션 공개.
           AI 모델이 OS 플랫폼에 통합되는 새 경쟁 구도 시작.
         </p>
         <div class="impact-bar">
@@ -446,7 +487,7 @@
           </div>
           <span class="impact-label" style="margin-left:4px">높음</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -456,15 +497,15 @@
       <span class="section-badge badge-enterprise">🏢 기업 AI 도입</span>
     </div>
     <div class="news-grid">
-      <div class="news-card">
-        <div class="card-tag">Deloitte · PwC · NVIDIA 보고서</div>
+      <a class="news-card" href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html" target="_blank">
+        <div class="card-arrow">↗</div>
+        <div class="card-tag">Deloitte · PwC · NVIDIA</div>
         <h3>기업 AI 도입률 78% — 그러나 전사 확산은 단 7%</h3>
         <p>
           78%의 기업이 최소 1개 업무에 AI를 사용하지만,
-          <span class="highlight">전사 규모 확산에 성공한 기업은 7%에 불과</span>하다(Deloitte 2026).
+          <span class="highlight">전사 규모 확산에 성공한 기업은 7%에 불과</span>하다.
           79%가 도입 과정에서 어려움을 겪고 있으며, C-레벨의 54%는
           "AI 도입이 조직을 분열시키고 있다"고 고백했다.
-          인재 스킬 갭이 가장 큰 장벽으로 꼽혔다.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -473,17 +514,16 @@
             <div class="dot filled high"></div><div class="dot filled high"></div><div class="dot"></div>
           </div>
         </div>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://www.techrepublic.com/article/ai-adoption-trends-enterprise/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">에이전틱 AI</div>
         <h3>에이전틱 AI 도입 97% — 통신·리테일 선두, 자율 실행이 기업 표준화</h3>
         <p>
           임원의 97%가 지난 1년간 AI 에이전트를 배포했다고 응답.
           <span class="highlight">통신(48%), 리테일·CPG(47%)</span>가 선도 업종.
           직원 52%가 이미 에이전트를 일상 업무에 사용 중.
-          생산성·효율성 개선이 66%의 기업에서 실질 성과로 확인됐으며
-          86%의 기업이 2026년 AI 예산을 증가할 계획이다.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -492,34 +532,16 @@
             <div class="dot filled high"></div><div class="dot filled high"></div><div class="dot"></div>
           </div>
         </div>
-      </div>
+      </a>
 
-      <div class="news-card">
-        <div class="card-tag">OpenAI · IBM</div>
-        <h3>OpenAI, AWS 통해 기업 시장 전면 공략 — 클라우드 룰 내에서 GPT-5.5 제공</h3>
-        <p>
-          OpenAI가 6월 1일 AWS에서 GPT-5.5와 Codex를 일반 제공 개시.
-          기업들이 <span class="highlight">기존 AWS 운영 규정 안에서</span> OpenAI 모델을 사용할 수 있어
-          엔터프라이즈 채택 장벽이 크게 낮아졌다.
-          IBM은 'Project Lightwell'을 통해 $5B를 투입, 오픈소스 AI 보안 취약점 탐지·수정에 집중.
-        </p>
-        <div class="impact-bar">
-          <span class="impact-label">전략 영향도</span>
-          <div class="impact-dots">
-            <div class="dot filled"></div><div class="dot filled"></div>
-            <div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="news-card">
+      <a class="news-card" href="https://blogs.nvidia.com/blog/state-of-ai-report-2026/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">인프라 투자</div>
-        <h3>빅테크 AI 인프라 합산 $6.8~7.2조 투자 계획 — 데이터센터·칩 수요 최고조</h3>
+        <h3>빅테크 AI 인프라 합산 $6.8~7.2조 — 데이터센터·칩 수요 최고조</h3>
         <p>
           Microsoft, Google, Meta, Amazon 4社가 2026년 AI 인프라에
           <span class="highlight">합산 $6.8~7.2조(약 9,500조 원)</span>를 투자할 계획이다.
-          전력·냉각·칩 공급망 전반에 수혜가 예상되며
-          한국 반도체(HBM, 고대역폭 메모리) 수요에도 직접적 영향.
+          한국 반도체(HBM) 수요에도 직접적 영향.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -528,7 +550,25 @@
             <div class="dot filled high"></div><div class="dot filled high"></div><div class="dot filled high"></div>
           </div>
         </div>
-      </div>
+      </a>
+
+      <a class="news-card" href="https://www.buildfastwithai.com/blogs/ai-news-today-june-8-2026" target="_blank">
+        <div class="card-arrow">↗</div>
+        <div class="card-tag">OpenAI · IBM</div>
+        <h3>OpenAI, AWS 통해 기업 시장 전면 공략 — 클라우드 룰 내에서 GPT-5.5 제공</h3>
+        <p>
+          OpenAI가 6월 1일 AWS에서 GPT-5.5와 Codex를 일반 제공 개시.
+          기업들이 <span class="highlight">기존 AWS 운영 규정 안에서</span> OpenAI 모델을 사용할 수 있어
+          엔터프라이즈 채택 장벽이 크게 낮아졌다.
+        </p>
+        <div class="impact-bar">
+          <span class="impact-label">전략 영향도</span>
+          <div class="impact-dots">
+            <div class="dot filled"></div><div class="dot filled"></div>
+            <div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 
@@ -538,17 +578,17 @@
       <span class="section-badge badge-reg">⚖️ 규제 & 정책</span>
     </div>
     <div class="news-grid">
-      <div class="news-card featured">
+      <a class="news-card featured" href="https://cannews.net/eu-us-and-china-enter-2026-with-stricter-ai-rules/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">🌐 글로벌 규제 3각 구도</div>
         <h3>EU·미국·중국 — 동시 강화, 방향은 각기 다른 세 갈래 길</h3>
         <p>
           <span class="highlight">[EU]</span> AI Act가 2026년 8월 2일 전면 발효 예정.
-          고위험 AI 시스템(채용, 대출, 의료, 교육 등)에 대한 의무 규정이 기업에 적용된다.
-          한국 기업이 EU에 AI 제품을 수출할 경우 즉각 규제 대상.<br><br>
-          <span class="highlight">[미국]</span> 3월 20일 백악관 'AI 국가정책 프레임워크' 발표. 7대 정책 기둥 제시, 연방 선점권이 핵심.
-          콜로라도 주 포괄적 AI법은 6월 말 발효 예정 — 고용·주택·신용·교육·의료에서 AI 사용 규제.<br><br>
+          고위험 AI 시스템(채용·대출·의료·교육)에 대한 의무 규정이 기업에 적용된다.<br><br>
+          <span class="highlight">[미국]</span> 3월 20일 백악관 'AI 국가정책 프레임워크' 발표. 7대 정책 기둥 제시.
+          콜로라도 주 포괄적 AI법 6월 말 발효 예정.<br><br>
           <span class="highlight">[중국]</span> 2026년 1월 1일부터 사이버보안법 개정으로 AI 거버넌스가 국가법에 편입.
-          '국가 AI 거버넌스 코드' 단일화 작업 중 — 알고리즘 강제 등록, 정부 승인 데이터셋 사용 의무화.
+          알고리즘 강제 등록, 정부 승인 데이터셋 사용 의무화.
         </p>
         <div class="impact-bar">
           <span class="impact-label">전략 영향도</span>
@@ -558,7 +598,7 @@
           </div>
           <span class="impact-label" style="margin-left:4px">최고 — 즉시 대응 필요</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -568,57 +608,59 @@
       <span class="section-badge badge-invest">💰 투자 & 시장</span>
     </div>
     <div class="news-grid">
-      <div class="news-card">
+      <a class="news-card" href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">벤처캐피탈 기록</div>
         <h3>Q1 2026 글로벌 VC $300B — AI가 전체의 80% 흡수, 사상 최고치</h3>
         <p>
           크런치베이스 발표: 2026년 1분기 전 세계 스타트업 투자 <span class="highlight">$300B</span> 돌파,
           전년 동기 대비 150% 이상 증가. 이 중 <span class="highlight">$242B(80%)가 AI 분야</span>에 집중됐다.
-          역대 최대 라운드 상위 5건 중 4건이 이 분기에 성사됐다.
         </p>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://aifundingtracker.com/top-50-ai-startups/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">대형 라운드</div>
         <h3>OpenAI $122B · Anthropic $65B(IPO 준비) · xAI $20B — 4社가 글로벌 VC의 65%</h3>
         <p>
           <span class="highlight">OpenAI $122B</span>, <span class="highlight">Anthropic $30B(Series H) + IPO 초안 SEC 제출</span>,
           <span class="highlight">xAI $20B</span>, Waymo $16B.
-          Anthropic의 IPO 추진은 생성형 AI 기업이 공모 시장에서 가치를 평가받는 첫 사례가 될 전망.
-          밸류에이션 $965B(약 1,340조 원).
+          Anthropic 밸류에이션 $965B(약 1,340조 원).
         </p>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://aifundingtracker.com/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">투자 트렌드</div>
-        <h3>자본은 계속 흐르되 '증명된 가치' 중심으로 집중 — 인프라·엔터프라이즈·카테고리 리더</h3>
+        <h3>자본은 '증명된 가치' 중심으로 집중 — 인프라·엔터프라이즈·카테고리 리더</h3>
         <p>
-          투자자가 우선시하는 3가지 카테고리:
-          ① <span class="highlight">인프라</span> (모델 툴링, 칩, 컴퓨트 관리, 데이터 레이어)
-          ② <span class="highlight">엔터프라이즈 AI 제품</span> (명확한 예산·반복 수요)
-          ③ <span class="highlight">카테고리 리더</span> (시장 표준 주장 가능한 기업)
-          단순 아이디어보단 실증된 PMF(제품-시장 적합성)가 필수.
+          투자자 우선 카테고리:
+          ① <span class="highlight">인프라</span> (모델 툴링·칩·컴퓨트)
+          ② <span class="highlight">엔터프라이즈 AI 제품</span>
+          ③ <span class="highlight">카테고리 리더</span>
+          실증된 PMF(제품-시장 적합성)가 필수 조건.
         </p>
-      </div>
+      </a>
 
-      <div class="news-card">
+      <a class="news-card" href="https://techstartups.com/2026/06/08/venture-capital-startup-funding-roundup-june-9-2026/" target="_blank">
+        <div class="card-arrow">↗</div>
         <div class="card-tag">PhysicsX</div>
-        <h3>런던 AI 스타트업 PhysicsX, $300M 시리즈C — 과학·공학 AI 섹터 부상</h3>
+        <h3>런던 AI 스타트업 PhysicsX, $300M 시리즈C — 산업 특화 AI 섹터 부상</h3>
         <p>
           싱가포르 국부펀드 Temasek 주도, M&G 등 참여.
-          물리 시뮬레이션 AI로 자동차·항공·에너지 엔지니어링 설계를 가속화하는 분야.
-          대형 프론티어 모델 외에 <span class="highlight">산업 특화 AI</span>가 독자 투자 섹터로 자리잡는 신호.
+          물리 시뮬레이션 AI로 자동차·항공·에너지 엔지니어링 분야 가속화.
+          <span class="highlight">산업 특화 AI</span>가 독자 투자 섹터로 자리잡는 신호.
         </p>
-      </div>
+      </a>
     </div>
   </div>
 
   <!-- ── INSIGHT BOX ── -->
   <div class="insight-box">
-    <h3>📌 전략 담당자를 위한 시사점</h3>
+    <h3>📌 전략 담당자를 위한 오늘의 시사점</h3>
     <ul class="insight-list">
       <li><strong>모델 공급망 다변화:</strong> OpenAI 단일 의존에서 벗어나 Microsoft MAI, Anthropic, Google Gemini 등 멀티 벤더 전략이 기업 표준이 되고 있다. 내부 AI 거버넌스 업데이트 필요.</li>
-      <li><strong>EU AI Act 8월 발효 카운트다운:</strong> EU 수출·서비스 기업은 고위험 AI 시스템 분류 및 준수 계획을 즉시 착수해야 한다. 2개월 이하 남았다.</li>
+      <li><strong>EU AI Act 8월 발효 카운트다운:</strong> EU 수출·서비스 기업은 고위험 AI 시스템 분류 및 준수 계획을 즉시 착수해야 한다. 약 7주 남았다.</li>
       <li><strong>에이전틱 AI = 경쟁력 기준선:</strong> 에이전트 도입률 97%는 이미 시장 표준. 미도입 기업은 비교 열위. 파일럿→확산 속도가 전략적 차별화 포인트.</li>
       <li><strong>AI 스킬 갭이 최대 리스크:</strong> 기술이 아니라 인재가 병목. 사내 AI 역량 교육 프로그램 우선 투자 권고.</li>
       <li><strong>iPhone → Claude 선택 옵션:</strong> AI가 OS 레벨 플랫폼 전쟁으로 격상. 소비자 접점 전략과 B2B AI 전략을 연계해서 재검토할 시점.</li>
