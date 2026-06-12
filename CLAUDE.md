@@ -17,6 +17,19 @@
 - 이슈 등록 전 반드시 `& $gh auth status` 확인 후 선언
 - PowerShell 이슈 본문은 변수로 분리 (따옴표 중첩 방지)
 
+## 하네스 워크플로
+
+`.claude/workflows/daily-report.js` — 리포트 자동 생성 파이프라인
+
+| 단계 | 내용 |
+|------|------|
+| 1. 수집 | 5개 주제 뉴스를 동시 검색 (`parallel`) |
+| 2. 작성 | 수집 결과로 `reports/AI_Report_{date}.html` 생성 |
+| 3. 검증 | rubric.md 채점 → 불합격 시 자동 수정 재시도 (최대 3회) |
+
+- 실행 시 `args.date` 로 날짜 지정 가능 (미지정 시 오늘 날짜)
+- 에이전트 팀(`coordinator`, `report-writer`, `quality-reviewer`)과 함께 동작
+
 ## 커스텀 스킬
 
 `audit-and-issue` — 풀 파이프라인: 감사 → 이슈 등록 → 수정 → 푸시 → close + 문서 최적화(doc-optimizer)  
