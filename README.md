@@ -44,7 +44,10 @@ ai-daily-report/
 │   └── daily-report-prompt.md      ← 리포트 생성 프롬프트 (파이프라인 소스)
 ├── reports/
 │   └── AI_Report_YYYY-MM-DD.html   ← 날짜별 산출물 (자동 생성, 누적)
-└── .claude/skills/audit-and-issue/ ← 레포 감사 · 이슈 · 문서최적화 스킬
+└── .claude/
+    ├── agents/                     ← AI 에이전트 팀 (report-writer, quality-reviewer)
+    ├── workflows/daily-report.js   ← 리포트 자동 생성 파이프라인
+    └── skills/audit-and-issue/     ← 레포 감사 · 이슈 · 문서최적화 스킬
 ```
 
 > **코드가 없는 이유**: 이 레포는 Python/JS 크롤러 대신 **Claude Code가 직접
